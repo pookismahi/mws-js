@@ -3,18 +3,19 @@
   "description" : "Amazon Marketplace Web Services client with support for all api calls.",
   "keywords" : ["mws", "amazon", "marketplace"],
   "homepage" : "_",
-  "version" : "0.1.0",
+  "version" : "0.2.0",
   "author" : "Eibbor Srenduas <robbies@eibbors.net> (http://eibbors.net)",
-  "contributors" : [ ],
+  "contributors" : [ "Shawn Zeller <szeller@gmail.com>" ],
   "main" : "./lib/mws",
   "directories" : {
     "lib": "./lib"
   },
   "repository" : {
     "type" : "git",
-    "url" : "https://github.com/eibbors/mws-js.git"
+    "url" : "https://github.com/szeller/mws-js.git"
   },
   "dependencies" : {
-    "xml2js" : ">=0.1.13"
+    "xml2js" : "~0.4.1",
+    "coffee-script": "~1.6.3"
   }
 }
