@@ -16,7 +16,8 @@
   },
   "dependencies" : {
     "xml2js" : "~0.4.1",
-    "request": "~2.31.0",
-    "coffee-script": "~1.6.3"
+    "request" : "~2.31.0",
+    "coffee-script" : "~1.6.3",
+    "underscore" : "1.5.2"
   }
 }
