@@ -15,9 +15,9 @@
     "url" : "https://github.com/szeller/mws-js.git"
   },
   "dependencies" : {
-    "xml2js" : "~0.4.1",
-    "request" : "~2.31.0",
-    "coffee-script" : "~1.6.3",
-    "underscore" : "1.5.2"
+    "xml2js" : "~0.4.4",
+    "request" : "~2.48.0",
+    "coffee-script" : "~1.8.0",
+    "underscore" : "1.7.0"
   }
 }
