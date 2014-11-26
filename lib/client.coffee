@@ -15,15 +15,12 @@ various data structures to encapsulate MWS requests, definitions, etc.
 @param {Object} options         Additional configuration options for this instance
 ###
 exports.Client = class AmazonMwsClient
-  constructor: (accessKeyId, secretAccessKey, merchantId, options) ->
-    @host = options.host or "mws.amazonservices.com"
-    @creds = crypto.createCredentials(options.creds or {})
-    @appName = options.appName or "mws-js"
-    @appVersion = options.appVersion or "0.1.0"
-    @appLanguage = options.appLanguage or "JavaScript"
-    @accessKeyId = accessKeyId or null
-    @secretAccessKey = secretAccessKey or null
-    @merchantId = merchantId or null
+  constructor: (@accessKeyId, @secretAccessKey, @merchantId, {@host, @appLanguage, @appVersion, @appName, credentials}) ->
+    @host ?= "mws.amazonservices.com"
+    @creds = crypto.createCredentials(credentials or {})
+    @appName ?= "mws-js"
+    @appVersion ?= "0.1.0"
+    @appLanguage ?= "JavaScript"
 
   ###
   The method used to invoke calls against MWS Endpoints. Recommended usage is
@@ -40,11 +37,12 @@ exports.Client = class AmazonMwsClient
     throw ("accessKeyId, secretAccessKey, and merchantId must be set") if not @secretAccessKey? or not @accessKeyId? or not @merchantId?
     requestOpts =
       method: "POST"
-      uri: "https://" + @host + api.path
+      uri: "https://#{@host}#{api.path}"
 
-  
     # Check if we're dealing with a file (such as a feed) upload
-    if api.upload
+    upload = query._BODY_?
+
+    if upload
       requestOpts.body = query._BODY_
       requestOpts.headers =
         "Content-Type": query._FORMAT_
@@ -63,7 +61,7 @@ exports.Client = class AmazonMwsClient
     else
       query["SellerId"] = @merchantId
     query = @sign(api.path, query)
-    unless api.upload
+    unless upload
       requestOpts.form = query
     else
       requestOpts.qs = query
