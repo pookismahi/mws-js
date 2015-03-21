@@ -1,4 +1,4 @@
-_ = require("underscore")
+_ = require 'underscore'
 
 ###
 Constructor for general MWS request objects, wrapped by api submodules to keep
@@ -6,7 +6,7 @@ things DRY, yet familiar despite whichever api is being implemented.
 
 @param {Object} options Settings to apply to new request instance.
 ###
-exports.Request = class AmazonMwsRequest
+module.exports = class AmazonMwsRequest
   constructor: (options) ->
     @api =
       path: options.path or "/"

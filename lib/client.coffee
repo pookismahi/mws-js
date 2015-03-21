@@ -1,9 +1,9 @@
-qs = require("querystring")
-https = require("https")
-crypto = require("crypto")
-xml2js = require("xml2js")
-request = require("request")
-_ = require("underscore")
+qs = require 'querystring'
+https = require 'https'
+crypto = require 'crypto'
+xml2js = require 'xml2js'
+request = require 'request'
+_ = require 'underscore'
 
 ###
 Constructor for the main MWS client interface used to make api calls and
@@ -14,7 +14,7 @@ various data structures to encapsulate MWS requests, definitions, etc.
 @param {String} merchantId      Aka SellerId, provided by Amazon (required)
 @param {Object} options         Additional configuration options for this instance
 ###
-exports.Client = class AmazonMwsClient
+module.exports = class AmazonMwsClient
   constructor: (@accessKeyId, @secretAccessKey, @merchantId, {@host, @appLanguage, @appVersion, @appName, credentials}) ->
     @host ?= "mws.amazonservices.com"
     @creds = crypto.createCredentials(credentials or {})
