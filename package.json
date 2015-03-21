@@ -2,7 +2,6 @@
   "name" : "mws-js",
   "description" : "Amazon Marketplace Web Services client with support for all api calls.",
   "keywords" : ["mws", "amazon", "marketplace"],
-  "homepage" : "_",
   "version" : "0.2.0",
   "author" : "Eibbor Srenduas <robbies@eibbors.net> (http://eibbors.net)",
   "contributors" : [ "Shawn Zeller <szeller@gmail.com>" ],
@@ -16,8 +15,8 @@
   },
   "dependencies" : {
     "xml2js" : "~0.4.4",
-    "request" : "~2.48.0",
-    "coffee-script" : "~1.8.0",
-    "underscore" : "1.7.0"
+    "request" : "~2.53.0",
+    "coffee-script" : "~1.9.1",
+    "underscore" : "1.8.2"
   }
 }
