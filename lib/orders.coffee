@@ -72,10 +72,10 @@ exports.types =
 ###
 
 exports.requests =
-  GetServiceStatus: ->
-    new OrdersRequest 'GetServiceStatus'
-  ListOrders: ->
-    new OrdersRequest 'ListOrders',
+  GetServiceStatus: (props) ->
+    new OrdersRequest 'GetServiceStatus', props
+  ListOrders: (props) ->
+    new OrdersRequest 'ListOrders', props,
       CreatedAfter: { name: 'CreatedAfter', type: 'Timestamp' }
       CreatedBefore: { name: 'CreatedBefore', type: 'Timestamp' }
       LastUpdatedAfter: { name: 'LastUpdatedAfter', type: 'Timestamp' }
@@ -88,17 +88,17 @@ exports.requests =
       SellerOrderId: { name: 'SellerOrderId' }
       MaxResultsPerPage: { name: 'MaxResultsPerPage' }
 
-  ListOrdersByNextToken: ->
-    new OrdersRequest 'ListOrdersByNextToken', 
+  ListOrdersByNextToken: (props) ->
+    new OrdersRequest 'ListOrdersByNextToken', props, 
       NextToken: { name: 'NextToken', required: true }
-  GetOrder: ->
-    new OrdersRequest 'GetOrder', 
+  GetOrder: (props) ->
+    new OrdersRequest 'GetOrder', props,  
       AmazonOrderId: { name: 'AmazonOrderId.Id', required: true, list: true }
-  ListOrderItems: ->
-    new OrdersRequest 'ListOrderItems', 
+  ListOrderItems: (props) ->
+    new OrdersRequest 'ListOrderItems', props,
       AmazonOrderId: { name: 'AmazonOrderId', required: true }
-  ListOrderItemsByNextToken: ->
-    new OrdersRequest 'ListOrderItemsByNextToken', 
+  ListOrderItemsByNextToken: (props) ->
+    new OrdersRequest 'ListOrderItemsByNextToken', props,
       NextToken: { name: 'NextToken', required: true }
 
 ###
@@ -108,7 +108,7 @@ exports.requests =
 # @param {Object} params Schemas for all supported parameters
 ###
 class OrdersRequest extends mws.Request
-  constructor: (action, params = {}) ->
+  constructor: (action, props = {}, params = {}) ->
     super 
       name: 'Orders'
       group: 'Order Retrieval'
@@ -116,3 +116,4 @@ class OrdersRequest extends mws.Request
       version: '2011-01-01'
       action: action
       params: params
+      props: props

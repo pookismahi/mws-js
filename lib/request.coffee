@@ -16,6 +16,8 @@ module.exports = class AmazonMwsRequest
     @action = options.action or "GetServiceStatus"
     @params = options.params or {}
 
+    @setMultiple options.props if options.props 
+
   ###
   Handles the casting, renaming, and setting of individual request params.
 
