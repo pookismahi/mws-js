@@ -37,46 +37,46 @@ exports.types =
 ###
 
 exports.requests =
-  GetServiceStatus: ->
+  GetServiceStatus: () ->
     new ProductsRequest 'GetServiceStatus'
-  ListMatchingProducts: ->
-    new ProductsRequest 'ListMatchingProducts',
+  ListMatchingProducts: (props) ->
+    new ProductsRequest 'ListMatchingProducts', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       Query: { name: 'Query', required: true }
       QueryContextId: { name: 'QueryContextId' } 
-  GetMatchingProduct: ->
-    new ProductsRequest 'GetMatchingProduct',
+  GetMatchingProduct: (props) ->
+    new ProductsRequest 'GetMatchingProduct', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       ASINList: { name: 'ASINList.ASIN', list: true, required: true }
-  GetMatchingProductForId: ->
-    new ProductsRequest 'GetMatchingProductForId',
+  GetMatchingProductForId: (props) ->
+    new ProductsRequest 'GetMatchingProductForId', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       IdType: { name: 'IdType', required: true }
       IdList: { name: 'IdList.Id', list: true, required: true }
-  GetCompetitivePricingForSKU: ->
-    new ProductsRequest 'GetCompetitivePricingForSKU',
+  GetCompetitivePricingForSKU: (props) ->
+    new ProductsRequest 'GetCompetitivePricingForSKU', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       SellerSKUList: { name: 'SellerSKUList.SellerSKU', list: true, required: true }
-  GetCompetitivePricingForASIN: ->
-    new ProductsRequest 'GetCompetitivePricingForASIN',
+  GetCompetitivePricingForASIN: (props) ->
+    new ProductsRequest 'GetCompetitivePricingForASIN', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       ASINList: { name: 'ASINList.ASIN', list: true, required: true }
-  GetLowestOfferListingsForSKU: ->
-    new ProductsRequest 'GetLowestOfferListingsForSKU',
+  GetLowestOfferListingsForSKU: (props) ->
+    new ProductsRequest 'GetLowestOfferListingsForSKU', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       ItemCondition: { name: 'ItemCondition' }
       SellerSKUList: { name: 'SellerSKUList.SellerSKU', list: true, required: true }
-  GetLowestOfferListingsForASIN: ->
-    new ProductsRequest 'GetLowestOfferListingsForASIN',
+  GetLowestOfferListingsForASIN: (props) ->
+    new ProductsRequest 'GetLowestOfferListingsForASIN', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       ItemCondition: { name: 'ItemCondition' }
       ASINList: { name: 'ASINList.ASIN', list: true, required: true }
-  GetProductCategoriesForSKU: ->
-    new ProductsRequest 'GetProductCategoriesForSKU',
+  GetProductCategoriesForSKU: (props) ->
+    new ProductsRequest 'GetProductCategoriesForSKU', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       SellerSKU: { name: 'SellerSKU', required: true }
-  GetProductCategoriesForASIN: ->
-    new ProductsRequest 'GetProductCategoriesForASIN',
+  GetProductCategoriesForASIN: (props) ->
+    new ProductsRequest 'GetProductCategoriesForASIN', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
       ASIN: { name: 'ASIN', required: true }
 
@@ -87,7 +87,7 @@ exports.requests =
 # @param {Object} params Schemas for all supported parameters
 ###
 class ProductsRequest extends mws.Request
-  constructor: (action, params = {}) ->
+  constructor: (action, props = {}, params = {}) ->
     super 
       name: 'Products'
       group: 'Products'
@@ -95,3 +95,4 @@ class ProductsRequest extends mws.Request
       version: '2011-10-01'
       action: action
       params: params
+      props: props
