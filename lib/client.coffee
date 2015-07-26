@@ -1,6 +1,7 @@
 qs = require 'querystring'
 https = require 'https'
 crypto = require 'crypto'
+tls = require 'tls'
 xml2js = require 'xml2js'
 request = require 'request'
 _ = require 'underscore'
@@ -16,8 +17,11 @@ various data structures to encapsulate MWS requests, definitions, etc.
 ###
 module.exports = class AmazonMwsClient
   constructor: (@accessKeyId, @secretAccessKey, @merchantId, {@host, @appLanguage, @appVersion, @appName, credentials}) ->
+    # handle the differences between node v10 and v12
+    createCredentials = tls.createSecureContext or crypto.createCredentials
+
     @host ?= "mws.amazonservices.com"
-    @creds = crypto.createCredentials(credentials or {})
+    @creds = createCredentials(credentials or {})
     @appName ?= "mws-js"
     @appVersion ?= "0.1.0"
     @appLanguage ?= "JavaScript"
