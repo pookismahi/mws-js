@@ -27,17 +27,21 @@ module.exports = class AmazonMwsRequest
   ###
   set: (param, value) ->
     p = @params[param]
+    console.log "Invalid parameter #{param} in MWS request" if !p
     v = p.value = {}
     
     # Handles the actual setting based on type
     setValue = (name, val) ->
-      if p.type is "Timestamp"
-        v[name] = val.toISOString()
-      else if p.type is "Boolean"
-        v[name] = (if val then "true" else "false")
-      else
-        v[name] = val
-
+      switch p.type
+        when 'Timestamp'
+          v[name] = val.toISOString()
+        when 'Boolean'
+          v[name] = (if val then 'true' else 'false')
+        when 'Complex'
+          for subKey, subVal of val
+            v["#{name}.#{subKey}"] = subVal
+        else 
+          v[name] = val
     
     # Lists need to be sequentially numbered and we take care of that here
     if p.list
@@ -78,9 +82,6 @@ module.exports = class AmazonMwsRequest
       #console.log("v  " + value + "\nn " + name + "\nr " + required);
       throw "ERROR: Missing required parameter, #{name}!" if param.required and not value?
 
-      if complex
-        value.appendTo q
-      else
-        for val of value
-          q[val] = value[val]     
+      for key, val of value
+        q[key] = val
     q

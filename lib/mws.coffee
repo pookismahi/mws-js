@@ -57,34 +57,11 @@ exports.Enum = class EnumType
         value.push @_choices[choice]
     value
 
-
-###
-# Complex List helper object. Once initialized, you should set
-# an add(args) method which pushes a new complex object to members.
-# 
-# @param {String} name Name of Complex Type (including .member or subtype)
-###
-exports.ComplexList = class ComplexListType
-  constructor: (@pre) ->
-    @members = []
-
-  ###
-  # Appends each member object as a complex list item
-  # @param  {Object} query Query object to append to
-  # @return {Object}       query
-  ###
-  appendTo: (query) ->
-    members = @members
-    i = 0
-    while i < members.length
-      for j of members[i]
-        query[@pre + '.' + i + 1 + '.' + j] = members[i][j]
-      i++
-    query
-
 exports.Client = require './client'
 exports.Request = require './request'
 exports.Products = require './products'
 exports.Feeds = require './feeds'
 exports.Orders = require './orders'
 exports.Reports = require './reports'
+exports.FBA = require './fba'
+
