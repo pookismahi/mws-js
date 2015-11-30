@@ -109,7 +109,11 @@ module.exports = class AmazonMwsClient
       m[k] = query[k]
       m
     , {})
-    stringToSign = ["POST", @host, path, qs.stringify(sorted)].join("\n")
+
+    stringToSign = ["POST", @host, path, qs.stringify(sorted)]
+      .join "\n" 
+      .replace /[!'()*]/g, (c) -> '%' + c.charCodeAt(0).toString(16).toUpperCase()
+
     query["Signature"] = crypto.createHmac("sha256", @secretAccessKey).update(stringToSign, "utf8").digest("base64")
     query
 
