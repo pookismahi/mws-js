@@ -77,12 +77,12 @@ module.exports = class AmazonMwsClient
         console.log "error: " + response.statusCode
         return
       
-      #console.log(data);
-      if data.slice(0, 5) is "<?xml"
+      # if the first character is <, assume we've got some xml to parse
+      if data.charAt(0) is '<'
         xml2js.parseString data, explicitArray: false, (err, result) ->
           
           # Throw an error if there was a problem reported
-          throw (err.Code + ": " + err.Message) if err?
+          throw (err.Code + ': ' + err.Message) if err?
           callback result
 
       else
