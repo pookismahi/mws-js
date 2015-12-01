@@ -73,15 +73,9 @@ module.exports = class AmazonMwsRequest
   ###
   query: ->
     q = {}
-    for param of @params
-      value = @params[param].value
-      name = @params[param].name
-      complex = (@params[param].type is "Complex")
-      required = @params[param].required
-      
-      #console.log("v  " + value + "\nn " + name + "\nr " + required);
+    for param, {name, value, type, required} of @params
+      # console.log "v #{value}\nn #{name}\nr #{required}"
       throw "ERROR: Missing required parameter, #{name}!" if param.required and not value?
 
-      for key, val of value
-        q[key] = val
+      _.extend q, value
     q
