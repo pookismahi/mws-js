@@ -66,6 +66,7 @@ exports.requests =
       MarketplaceId: { name: 'MarketplaceId', required: true }
       ItemCondition: { name: 'ItemCondition' }
       SellerSKUList: { name: 'SellerSKUList.SellerSKU', list: true, required: true }
+      ExcludeMe: { name: 'ExcludeMe', type: 'Boolean' }
   GetLowestOfferListingsForASIN: (props) ->
     new ProductsRequest 'GetLowestOfferListingsForASIN', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
