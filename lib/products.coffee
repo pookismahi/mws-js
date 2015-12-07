@@ -72,6 +72,26 @@ exports.requests =
       MarketplaceId: { name: 'MarketplaceId', required: true }
       ItemCondition: { name: 'ItemCondition' }
       ASINList: { name: 'ASINList.ASIN', list: true, required: true }
+  GetLowestPricedOffersForSKU: (props) ->
+    new ProductsRequest 'GetLowestPricedOffersForSKU', props, 
+      MarketplaceId: { name: 'MarketplaceId', required: true }
+      ItemCondition: { name: 'ItemCondition' }
+      SellerSKU: { name: 'SellerSKU', required: true }
+  GetLowestPricedOffersForASIN: (props) ->
+    new ProductsRequest 'GetLowestPricedOffersForASIN', props, 
+      MarketplaceId: { name: 'MarketplaceId', required: true }
+      ItemCondition: { name: 'ItemCondition' }
+      ASIN: { name: 'ASIN', required: true }
+  GetMyPriceForSKU: (props) ->
+    new ProductsRequest 'GetMyPriceForSKU', props, 
+      MarketplaceId: { name: 'MarketplaceId', required: true }
+      ItemCondition: { name: 'ItemCondition' }
+      SellerSKUList: { name: 'SellerSKUList.SellerSKU', list: true, required: true }
+  GetMyPriceForASIN: (props) ->
+    new ProductsRequest 'GetMyPriceForASIN', props, 
+      MarketplaceId: { name: 'MarketplaceId', required: true }
+      ItemCondition: { name: 'ItemCondition' }
+      ASINList: { name: 'ASINList.ASIN', list: true, required: true }
   GetProductCategoriesForSKU: (props) ->
     new ProductsRequest 'GetProductCategoriesForSKU', props, 
       MarketplaceId: { name: 'MarketplaceId', required: true }
