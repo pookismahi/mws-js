@@ -19,10 +19,12 @@ exports.enums =
     ]
   OrderStatuses: ->
     new mws.Enum [
+      'PendingAvailability'
       'Pending'
       'Unshipped'
       'PartiallyShipped'
       'Shipped'
+      'InvoiceUnconfirmed'
       'Canceled'
       'Unfulfillable'
     ]
@@ -56,7 +58,6 @@ exports.types =
     'Other': 'Any payment method other than COD or CVS'
   ServiceStatus:
     'GREEN': 'The service is operating normally.'
-    'GREEN_I': 'The service is operating normally + additional info provided'
     'YELLOW': 'The service is experiencing higher than normal error rates or degraded performance.'
     'RED': 'The service is unabailable or experiencing extremely high error rates.'
   ShipServiceLevelCategory:
@@ -79,9 +80,9 @@ exports.requests =
       CreatedAfter: { name: 'CreatedAfter', type: 'Timestamp' }
       CreatedBefore: { name: 'CreatedBefore', type: 'Timestamp' }
       LastUpdatedAfter: { name: 'LastUpdatedAfter', type: 'Timestamp' }
-      MarketplaceId: { name: 'MarketplaceId.Id', list: true, required: true }
       LastUpdatedBefore: { name: 'LastUpdatedBefore', type: 'Timestamp' }
       OrderStatus: { name: 'OrderStatus.Status', type: 'orders.OrderStatuses', list: true }
+      MarketplaceId: { name: 'MarketplaceId.Id', list: true, required: true }
       FulfillmentChannel: { name: 'FulfillmentChannel.Channel', type: 'orders.FulfillmentChannels', list: true }
       PaymentMethod: { name: 'PaymentMethod.Method', type: 'orders.PaymentMethods', list: true }
       BuyerEmail: { name: 'BuyerEmail' }
@@ -112,8 +113,8 @@ class OrdersRequest extends mws.Request
     super 
       name: 'Orders'
       group: 'Order Retrieval'
-      path: '/Orders/2011-01-01'
-      version: '2011-01-01'
+      path: '/Orders/2013-09-01'
+      version: '2013-09-01'
       action: action
       params: params
       props: props
