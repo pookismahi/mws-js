@@ -5,7 +5,7 @@
   "version" : "0.2.0",
   "author" : "Eibbor Srenduas <robbies@eibbors.net> (http://eibbors.net)",
   "contributors" : [ "Shawn Zeller <szeller@gmail.com>" ],
-  "main" : "./lib/mws",
+  "main" : "./index.js",
   "directories" : {
     "lib": "./lib"
   },
@@ -16,7 +16,7 @@
   "dependencies" : {
     "xml2js" : "^0.4.4",
     "request" : "^2.81.0",
-    "coffee-script" : "^1.12.2",
+    "coffeescript" : "^2.0.0",
     "underscore" : "^1.8.3"
   }
 }
