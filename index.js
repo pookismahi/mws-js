@@ -1,2 +1,1 @@
-require('coffeescript/register');
-module.exports = require('./lib/mws');
+module.exports = require('./dist/mws');
